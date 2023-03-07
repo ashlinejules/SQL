@@ -1,0 +1,35 @@
+--Create a Video Game Store Database
+
+CREATE TABLE video_games(id INTEGER PRIMARY KEY, name TEXT, system TEXT, price INTEGER, rating INTEGER);
+
+INSERT INTO video_games VALUES
+(1, "Fortnite", "Xbox", 0, 4),
+(2, "Life is Strange", "Xbox", 19.99, 5),
+(3, "GTA V", "Xbox", 59.99, 4),
+(4, "A Way Out", "Xbox", 5.99, 5),
+(5, "Spiderman", "Playstation", 39.99, 5),
+(6, "Finding Nemo", "Gambeboy SP", 19.99, 3),
+(7, "Alice in Wonderland", "Wii", 28.99, 4),
+(8, "Michael Jackson Experience", "Wii", 34.50, 5),
+(9, "Mario Kart 8", "Nintendo DS", 39.99, 5),
+(10, "Legend of Zelda: Windwaker", "Gamecube", 69.99, 5),
+(11, "Animal Crossing", "Gamecube", 49.99, 5),
+(12, "Animal Crossing: New Horizons", "Switch", 59.99, 4),
+(13, "Hamtaro", "Gameboy SP", 10, 4),
+(14, "Kena Bridge of Spirits", "Playstation", 35.99, 4),
+(15, "Super Mario Bros", "Gameboy SP", 29.99, 5);
+
+--display the database ordered by price. 
+SELECT * FROM store
+ORDER BY price desc; 
+
+--What is the average price of items for the Xbox system?
+SELECT AVG(price) AS "Average Xbox Game Price" 
+FROM video_games 
+WHERE system = "Xbox";
+
+--What are the 5 most expensive games?
+SELECT name, system, price 
+FROM video_games 
+ORDER BY price desc 
+LIMIT 5;
