@@ -1,0 +1,46 @@
+-- Created a database of gamers with tables about what they are known for and who they have collaborated with.
+
+CREATE TABLE gamers (id INTEGER primary key autoincrement,
+name TEXT, 
+subscribers INTEGER);
+
+INSERT INTO gamers (name, subscribers) VALUES ("CoryXKenshin", "15.7M");
+INSERT INTO gamers (name, subscribers) VALUES ("berleezy", "2.2M"); 
+INSERT INTO gamers (name, subscribers) VALUES ("Ninja", "18M");
+INSERT INTO gamers (name, subscribers) VALUES ("pokimane", "9M");
+INSERT INTO  gamers (name, subscribers) VALUES ("kennyhaller", "254K");
+INSERT INTO gamers (name, subscribers) VALUES ("dailywordle", "956.1K");
+
+CREATE TABLE known_for (id INTEGER primary key autoincrement, 
+person_id TEXT, 
+platform TEXT, 
+popular_for TEXT);
+
+INSERT INTO known_for (person_id, platform, popular_for) VALUES (1, "Youtube", "Horror Games");
+INSERT INTO known_for (person_id, platform, popular_for) VALUES (2, "Youtube", "Funny Games");
+INSERT INTO known_for (person_id, platform, popular_for) VALUES (3, "Twitch", "Fortnite");
+INSERT INTO known_for (person_id, platform, popular_for) VALUES (4, "Twitch", "Fortnite");
+INSERT INTO known_for (person_id, platform, popular_for) VALUES (5, "TikTok", "Crossword");
+INSERT INTO known_for (person_id, platform, popular_for) VALUES (6, "TikTok", "Wordle");
+
+CREATE TABLE collab_with (id INTEGER primary key autoincrement, 
+person_id TEXT,
+collab_id TEXT);
+
+INSERT INTO collab_with (person_id, collab_id) VALUES (1, 2); 
+INSERT INTO collab_with (person_id, collab_id) VALUES (2, 1); 
+INSERT INTO collab_with (person_id, collab_id) VALUES (3, 4); 
+INSERT INTO collab_with (person_id, collab_id) VALUES (4, 3); 
+INSERT INTO collab_with (person_id, collab_id) VALUES (5, 6); 
+INSERT INTO collab_with (person_id, collab_id) VALUES (6, 5); 
+
+--Aggregated data using a JOIN to list the name of the gamer and the platform they use
+
+SELECT gamers.name, known_for.platform FROM gamers JOIN known_for 
+ON gamers.id = known_for.person_id;
+
+--Aggregated data using multiple self JOINS to list the gamer and the name of the gamer they collabaorated with
+SELECT a.name, b.name FROM collab_with
+JOIN gamers a
+ON a.id = collab_with.collab_id
+JOIN gamers b ON b.id = collab_with.person_id;
